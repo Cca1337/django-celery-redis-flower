@@ -1,0 +1,9 @@
+dump.rdb
+__pycache__
+.env
+results.sqlite
+db.sqlite3
+*.db
+*.log
+
+

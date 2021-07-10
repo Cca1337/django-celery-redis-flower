@@ -1,0 +1,73 @@
+{% extends "main/base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<br>
+<button class="btn btn-primary"><a style="color:white" href="/"> Back</a></button>
+<button class="btn btn-secondary"><a style="color:white" href="/dashboard"> Refresh</a></button>
+<br>
+
+
+<hr>
+{% if last_five %}
+<h2 align="center" class="skuska">Successfull tasks</h2>
+<ul class="list-group list-group-flush " id="successTasks">
+
+{% for id in last_five %}
+    {% if id.status == success %}
+    <li class="list-group-item">
+    <div class="row">      
+            <div class="col-sm" >
+                 <small class="text-muted">{{id.task_id}}</small>
+             </div>
+
+             <div class="col-sm">
+                 <small class="text-muted">{{id.status}}</small>
+             </div>
+             <div class="col-sm">
+                 <small class="text-muted">{{id.task_args}}</small>
+             </div>             
+             <div class="col-sm">
+                 <small class="text-muted">{{id.result}}</small>
+             </div>             
+    </div>       
+    </li>  
+    {% endif %}
+    
+{% endfor %} 
+</ul>
+{% endif %}
+
+{% if failed %}
+<hr>
+<h2 align="center" class="skuska">FAILED tasks</h2>
+
+{% for id in failed %}
+    {% if id.status == failure %}
+    <li class="list-group-item">
+    <div class="row">      
+            <div class="col-sm" >
+                 <small class="text-muted">{{id.task_id}}</small>
+             </div>
+
+             <div class="col-sm">
+                 <small class="text-muted">{{id.status}}</small>
+             </div>
+             <div class="col-sm">
+                 <small class="text-muted">{{id.task_args}}</small>
+             </div>                 
+             <div class="col-sm">
+                 <small class="text-muted">{{id.result}}</small>
+             </div>             
+    </div>       
+    </li>  
+    {% endif %}
+{% endfor %}  
+{% endif %}   
+    
+{% if not last_five and not failed %}
+    <p class="skuska" align="center">No Tasks in aka DB</p>
+{% endif %}
+
+
+{% endblock %}

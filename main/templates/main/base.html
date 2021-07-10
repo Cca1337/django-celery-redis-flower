@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"/>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"/>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"/>
+
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="/static/icons/favicon.png">
+
+
+</head>
+<body>
+<div id="page-container">
+    <div id="content-wrap">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
+              <a class="navbar-brand" href="/">
+                  <img src="/static/icons/haker.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                  Website
+              </a>
+              <button class="navbar-toggler"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#navbar">
+                  <span class="navbar-toogler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbar">
+                  <div class="navbar-nav">
+                  <a class="nav-item nav-link" id="home" href="/">Home</a>
+                  <a class="nav-item nav-link" id="dashboard" href="dashboard">Dashboard</a>
+                  <a class="nav-item nav-link" id="Flower" href="http://172.105.84.31:5555">Flower</a>                  
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle"
+                             data-toggle="dropdown" href="#"
+                             role="button"
+                             aria-haspopup="true"
+                             aria-expanded="false">Tasks</a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/weather">Weather</a>                          
+                            <a class="dropdown-item" href="/emails">Emails</a>
+                            <a class="dropdown-item" href="/word-counter">Word counter</a>                       
+                          </div>
+                      </li>
+                      <form method="get"
+                            action="http://www.google.com/search"
+                            class="form-inline my-2 my-lg-0">
+                          <input class="form-control mr-sm-2 right1"
+                                 type="text"
+                                 maxlength="255"
+                                 name="q"
+                                 placeholder="google.search"
+                                 value="">
+                          <button class="btn btn-outline-success my-2 my-sm-0 right" type="submit" value="Google Search">Search</button>
+                      </form>
+
+                  </div>
+
+              </div>
+
+        </nav>
+
+
+        <div id="gradient">
+        
+                {% for message in messages %}
+        <div class="messages">
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message | safe }}
+            </div>
+        </div>
+        {% endfor %}
+        
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+   <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous">
+   </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous">
+    </script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="/static/js/index.js"></script>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nanobar/0.2.1/nanobar.min.js"></script>
+    
+    <script src="{% static 'js/celery_progress.js' %}"></script> 
+
+   {% block script %} {% endblock %} 
+</body>
+</html>

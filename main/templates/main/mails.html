@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Email sender{% endblock %}
+
+{% block content %}
+
+
+  <br>
+  <div class="container">
+    <button class="btn btn-info"><a style="color:white" href="/">< Back</a></button>
+    
+  <br>
+ 
+<div class="row">
+      <div class="col">
+        <h5 class="mt-3">Send async emails</h5>
+        <div class="card mt-3">
+          <div class="card-body">
+		<form method="POST">
+	       {% csrf_token %}
+	      <p>Send test email to: <input type="text" name="email" value="{{ email }}"></p>
+	      <button class="btn btn-info" type="submit" name="submit" value="Send">Send</button>
+	      <button class="btn btn-info" type="submit" name="submit" value="Send in 1 minute">Send in 1 minute</button>
+	    </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<hr>
+
+
+
+{% endblock %}

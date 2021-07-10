@@ -1,0 +1,13 @@
+Django
+celery
+celery-progress
+django-celery-results
+redis
+django-redis
+flower
+python-decouple
+beautifulsoup4==4.9.3
+bs4==0.0.1
+Jinja2==2.11.1
+requests==2.25
+lxml

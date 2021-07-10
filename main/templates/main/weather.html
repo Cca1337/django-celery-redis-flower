@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+{% block title %}Weather API{% endblock %}
+
+{% block content %}
+
+  <br>
+  <div class="container">
+    <button class="btn btn-info"><a style="color:white" href="/">< Back</a></button>
+    <br>
+    <label class="skuska">Enter your city here</label>
+    <form method="POST">
+    {% csrf_token %}
+        <input name="mesto"
+               id="mesto"
+               placeholder="Mesto"
+               autocomplete="off"
+               class="form-control skuska">
+               <br>
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Search!</button>
+ 	<br>
+       </div>
+    </form>
+    <br>
+  </div>
+
+
+ <hr>
+{% for task_id in task_ids %}
+<div class='progress-wrapper-{{ forloop.counter0 }}'>
+    <div id='progress-bar-{{ forloop.counter0 }}' class='progress-bar-{{ forloop.counter0 }}' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+    <div id="progress-bar-message-{{ forloop.counter0 }}">Waiting for progress to start...</div>
+    <div id="progress-result-{{ forloop.counter0 }}"></div>
+</div>
+<hr>
+{% endfor %}
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const task_urls = [
+            {% for task_id in task_ids %}"{% url 'celery_progress:task_status' task_id %}",
+        {% endfor %}];
+        for (var i = 0; i < task_urls.length; i++) {
+            CeleryProgressBar.initProgressBar(task_urls[i], {
+                progressBarId: "progress-bar-" + i,
+                progressBarMessageId: "progress-bar-message-" + i,
+                resultElementId: "progress-result-" + i
+            });
+        }
+    });
+</script>
+	
+{% endblock %}
